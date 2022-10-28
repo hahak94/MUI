@@ -9,7 +9,23 @@ import DatePicker from "react-datepicker"
 import 'react-datepicker/dist/react-datepicker.css'
 import Stack from'@mui/material/Stack';
 
+
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import Button from '@mui/material/Button';
+
+import TextField from'@mui/material/TextField';
+import Tabs from'@mui/material/Tabs';
+import Tab from'@mui/material/Tab';
+ 
+
+
+
 function App() {
+const [value, setPage] = useState('one')
+const handle =(event, value) => {
+  setPage(value)
+}
+
   const [uInput, setUInput] = useState({
     date: new Date(),
     description:'',
@@ -59,29 +75,56 @@ function App() {
         </p>    
       </header>    
       
-        <p>Add to do</p>
-        <DatePicker
+<Tabs value={value} onChange={handle}>
+  <Tab value="one" label="Home page"/>
+  <Tab value="two" label="Todo"/>
+</Tabs>
+
+{value === "one" &&<div> Welcome to Homepage </div>}
+{value === "two" &&
+<div>  
+        <p>Add to do</p>  
+<DatePicker
            label ="Date"  
-         dateFormat='dd/MM/yyyy'
+           inputFormat="DD/MM/YYYY"
            selected= {uInput.date}
+           renderInput={(props) => <TextField {...props} />}
            onChange={ date =>{
              setDate(date) 
             }
            }
-            /> 
-        <Stack direction="row" spacing={2} justifyContent="center" alignItems="center"> 
-        
-          <label>Description:</label>
-          <input type="text" name="description" value={uInput.description} onChange={inputChange}/>
-          <label>Priority:</label>
-          <input type="text" onChange={inputChange} name="priority" value={uInput.priority}/>
-         
-        <button onClick={handleClick}>Add</button>
-        <button onClick={deleteTodo}>Delete</button>
+           /> 
+           
+            <Stack direction="row" spacing={1} justifyContent="center" alignItems="center"> 
+            
+           
+           <TextField
+           label="Description"
+           variant="standard"
+           name="description"
+           value={uInput.description}
+           onChange={inputChange} />
+           
+           <TextField
+           label="Priority"
+           variant="standard"
+           name="priority"
+           value={uInput.priority}
+           onChange={inputChange} />
+       
+          
+       
+        <Button variant="outlined"  onClick={handleClick}>Add</Button>
+       
+   
+        <Button   variant="outlined" color="secondary" 
+        onClick={deleteTodo} endIcon={<DeleteTwoToneIcon/>} >Delete  </Button>
+       
+
         </Stack>
        
 
-     <div className="ag-theme-material" style={{height:'500px'}}> 
+     <div className="ag-theme-material" style={{height: '700px', width: '70%', margin: 'auto'}}> 
 
      <AgGridReact  
       ref={gridRef} 
@@ -93,9 +136,13 @@ function App() {
         </AgGridReact>
  
       </div >
+      </div>}
       
     </div>
+    
   )
+  
 }
+
   
 export default App;
