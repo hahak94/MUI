@@ -3,25 +3,18 @@ import './App.css';
 import { AgGridReact } from 'ag-grid-react'
 import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
-// date-fns
-
 import DatePicker from "react-datepicker"
 import format from 'date-fns/format';
 import 'react-datepicker/dist/react-datepicker.css'
 import Stack from '@mui/material/Stack';
-
-
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import Button from '@mui/material/Button';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-
 import TextField from '@mui/material/TextField';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-
-
 
 
 function App() {
@@ -82,31 +75,27 @@ function App() {
         </p>
       </header>
 
-      <Tabs value={value} onChange={handle}>
-        <Tab value="one" label="Home page" />
-        <Tab value="two" label="Todo" />
-      </Tabs>
-
-      {value === "one" && <div> Welcome to Homepage </div>}
-      {value === "two" &&
+   
         <div>
           <p>Add to do</p>
 
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-
-          <DesktopDatePicker
-            label="Date"
-            inputFormat="DD/MM/YYYY"
-            value={uInput.date}
-            renderInput={(props) => <TextField {...props} />}
-            onChange={date => {
-              setDate(date)
-            }
-            }
-          />
-          </LocalizationProvider>
+          
 
           <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
+
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+<DesktopDatePicker
+  label="Date"
+  inputFormat="DD/MM/YYYY"
+  value={uInput.date}
+  renderInput={(props) => <TextField {...props} />}
+  onChange={date => {
+    setDate(date)
+  }
+  }
+/>
+</LocalizationProvider>
 
             <TextField
               label="Description"
@@ -146,7 +135,7 @@ function App() {
             </AgGridReact>
 
           </div >
-        </div>}
+        </div>
 
     </div>
 
